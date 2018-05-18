@@ -58,7 +58,7 @@ public class IA extends Joueur{
       }
     }
 
-    if(mouvCouvres.size() > 0){
+    if(mouvCouvres.size() > 0 && Math.random() > .95){
 
       int index = (int)(Math.random() * mouvCouvres.size());
       mouvCouvres.get(index).effectuer();
@@ -70,7 +70,13 @@ public class IA extends Joueur{
       mouvSimples.get(index).effectuer();
       System.out.println("L'IA " + this.EQUIPE + " joue:");
 
-    } else {
+    } else  if(mouvCouvres.size() > 0){
+		
+	  int index = (int)(Math.random() * mouvCouvres.size());
+      mouvCouvres.get(index).effectuer();
+      System.out.println("L'IA " + this.EQUIPE + " joue:");
+		
+	} else {
 
       System.out.println("L'IA " + this.EQUIPE + " est bloquée, passe son tour");
     }
