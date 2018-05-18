@@ -358,10 +358,14 @@ public class Plateau{
           if(damier[x][y].getEquipe() == 0){
 
             texte += " (" + Integer.toString(damier[x][y].getTaille()) + ")";
-          } else {
+            
+          } else if(damier[x][y].getEquipe() == 1){
 
             texte += " [" + Integer.toString(damier[x][y].getTaille()) + "]";
-          }
+          } else {
+			  
+			texte += "    ";
+		  }
         }
       }
     }
