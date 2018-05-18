@@ -20,8 +20,6 @@ joueur0 = new IA(0);
 
 joueur1 = new IA(1);
 
-Cependant, l'IA peut toujours se bloquer en bouclant sur le même coup tout les n tours.
-
 Vous pouvez bien entendu faire jouer deux humains entre eux sans problèmes en suivant la même logique.
 
 Pour lancer le jeu sur windows, saisir dans le terminal:
