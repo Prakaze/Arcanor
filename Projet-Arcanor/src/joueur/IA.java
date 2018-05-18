@@ -76,7 +76,7 @@ public class IA extends Joueur{
       mouvCouvres.get(index).effectuer();
       System.out.println("L'IA " + this.EQUIPE + " joue:");
 		
-	} else {
+    } else {
 
       System.out.println("L'IA " + this.EQUIPE + " est bloquée, passe son tour");
     }
