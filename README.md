@@ -11,11 +11,13 @@ L'utilisateur devra saisir un mouvement dans le terminal sous la forme: "positio
 Vous pouvez faire jouer l'IA contre elle même en modifiant dans le fichier Arcanor.java (ligne 28):
 
 joueur0 = new Humain(0);
+
 joueur1 = new IA(1);
 
 par:
 
 joueur0 = new IA(0);
+
 joueur1 = new IA(1);
 
 Cependant, l'IA peut toujours se bloquer en bouclant sur le même coup tout les n tours.
