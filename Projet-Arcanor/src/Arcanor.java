@@ -3,6 +3,7 @@ import plateau.Piece;
 import joueur.Joueur;
 import joueur.Humain;
 import joueur.IA;
+import java.io.FileNotFoundException;
 
 public class Arcanor{
 
@@ -23,7 +24,13 @@ public class Arcanor{
    */
   public static void main(String[] args){
 
-    Plateau.chargePartie("permanent_saves/classic");
+    try{
+      Plateau.chargePartie("permanent_saves/classic");
+    } catch(FileNotFoundException e){
+
+      e.printStackTrace();
+      System.exit(0);
+    }
 
     joueur0 = new Humain(0);
     joueur1 = new IA(1);
@@ -33,7 +40,7 @@ public class Arcanor{
 
     Plateau.print();
 
-    while(!jeuFini && !(joueur0.estBloque() && joueur1.estBloque())){
+    while(!jeuFini){
 
       if(Plateau.getEquipeQuiJoue() == 0){
 
@@ -44,28 +51,27 @@ public class Arcanor{
         joueur1.joue();
       }
 
-      if(!jeuFini){
+      if(Plateau.points(Plateau.getEquipeQuiJoue()) >= 12){
 
-        if(Plateau.points(Plateau.getEquipeQuiJoue()) >= 12){
+        gagnant = Plateau.getEquipeQuiJoue();
+        jeuFini = true;
+      } else {
 
-          gagnant = Plateau.getEquipeQuiJoue();
+        if(joueur1.estBloque() && joueur0.estBloque()){
           jeuFini = true;
-        } else {
-
-          Plateau.passeLeTour();
         }
 
-        Plateau.print();
+        Plateau.passeLeTour();
       }
+
+      Plateau.print();
+
     }
 
     if(gagnant == -1){
 
-      if(jeuFini){
-        System.out.println("\nJeu quitté");
-      } else {
-        System.out.println("\nJeu arrêté, tout les joueurs sont bloqués");
-      }
+      System.out.println("\nJeu arrêté, tout les joueurs sont bloqués");
+
     } else {
 
       System.out.println("\nLe joueur " + Integer.toString(gagnant) + " a gagné!");

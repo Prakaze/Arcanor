@@ -3,6 +3,7 @@ package joueur;
 import plateau.Plateau;
 import plateau.Piece;
 import java.util.ArrayList;
+import plateau.InvalidMoveException;
 
 public class IA extends Joueur{
 
@@ -21,66 +22,73 @@ public class IA extends Joueur{
    * L'IA repère tout les mouvements possibles avec ses pièces et joue un
    * mouvement aléatoire parmis eux, en favorisant la couverture de pièces
    * ennemies.
-   * @return vrai dans tout les cas, cette fonction écrase la méthode
-   * abstract de joueur et ce boolean n'est utile que dans le cas ou le joueur
-   * est humain (et donc pas une AI).
    */
-  public boolean joue(){
+  public void joue(){
 
-    ArrayList<Mouvement> mouvSimples = new ArrayList<Mouvement>();
-    ArrayList<Mouvement> mouvCouvres = new ArrayList<Mouvement>();
+    if(this.estBloque()){
 
-    for(int y = 0; y < Plateau.tailleY; y++){
+      System.out.println("L'IA est bloquée, passe son tour.");
 
-      for(int x = 0; x < Plateau.tailleX; x++){
+    } else{
 
-        if(Plateau.pieceEn(x, y) != null){
+      ArrayList<Mouvement> mouvSimples = new ArrayList<Mouvement>();
+      ArrayList<Mouvement> mouvCouvres = new ArrayList<Mouvement>();
 
-          if(Plateau.pieceEn(x, y).getEquipe() == this.EQUIPE && !Plateau.pieceEn(x, y).getInnactive()){
+      for(int y = 0; y < Plateau.tailleY; y++){
 
-            for(int autreY = y-1; autreY <= y+1; autreY++){
+        for(int x = 0; x < Plateau.tailleX; x++){
 
-              for(int autreX = x-1; autreX <= x+1; autreX++){
+          if(Plateau.pieceEn(x, y) != null){
 
-                if(Plateau.typeMouvement(x, y, autreX, autreY) == Plateau.MOUV_SIMPLE){
+            if(Plateau.pieceEn(x, y).getEquipe() == this.EQUIPE && !Plateau.pieceEn(x, y).getInnactive()){
 
-                  mouvSimples.add(new Mouvement(x, y, autreX, autreY, true));
-                  mouvSimples.add(new Mouvement(x, y, autreX, autreY, false));
+              for(int autreY = y-1; autreY <= y+1; autreY++){
 
-                } else if (Plateau.typeMouvement(x, y, autreX, autreY) == Plateau.MOUV_COUVRE){
+                for(int autreX = x-1; autreX <= x+1; autreX++){
 
-                    mouvCouvres.add(new Mouvement(x, y, autreX, autreY, true));
+                  if(Plateau.typeMouvement(x, y, autreX, autreY) == Plateau.MOUV_SIMPLE){
+
+                    mouvSimples.add(new Mouvement(x, y, autreX, autreY, true));
+                    mouvSimples.add(new Mouvement(x, y, autreX, autreY, false));
+
+                  } else if (Plateau.typeMouvement(x, y, autreX, autreY) == Plateau.MOUV_COUVRE){
+
+                      mouvCouvres.add(new Mouvement(x, y, autreX, autreY, true));
+                  }
                 }
               }
             }
           }
         }
       }
+
+      try{
+        if(mouvCouvres.size() > 0 && Math.random() > .95){
+
+          int index = (int)(Math.random() * mouvCouvres.size());
+          mouvCouvres.get(index).effectuer();
+          System.out.println("L'IA " + this.EQUIPE + " joue:");
+
+        } else if(mouvSimples.size() > 0){
+
+          int index = (int)(Math.random() * mouvSimples.size());
+          mouvSimples.get(index).effectuer();
+          System.out.println("L'IA " + this.EQUIPE + " joue:");
+
+        } else  if(mouvCouvres.size() > 0){
+
+    	  int index = (int)(Math.random() * mouvCouvres.size());
+          mouvCouvres.get(index).effectuer();
+          System.out.println("L'IA " + this.EQUIPE + " joue:");
+
+        } else {
+
+          System.out.println("L'IA " + this.EQUIPE + " est bloquée, passe son tour");
+        }
+      } catch(InvalidMoveException e){
+
+        e.printStackTrace();
+      }
     }
-
-    if(mouvCouvres.size() > 0 && Math.random() > .95){
-
-      int index = (int)(Math.random() * mouvCouvres.size());
-      mouvCouvres.get(index).effectuer();
-      System.out.println("L'IA " + this.EQUIPE + " joue:");
-
-    } else if(mouvSimples.size() > 0){
-
-      int index = (int)(Math.random() * mouvSimples.size());
-      mouvSimples.get(index).effectuer();
-      System.out.println("L'IA " + this.EQUIPE + " joue:");
-
-    } else  if(mouvCouvres.size() > 0){
-		
-	  int index = (int)(Math.random() * mouvCouvres.size());
-      mouvCouvres.get(index).effectuer();
-      System.out.println("L'IA " + this.EQUIPE + " joue:");
-		
-    } else {
-
-      System.out.println("L'IA " + this.EQUIPE + " est bloquée, passe son tour");
-    }
-
-    return true;
   }
 }

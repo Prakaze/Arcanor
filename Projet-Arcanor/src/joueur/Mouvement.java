@@ -1,5 +1,6 @@
 package joueur;
 
+import plateau.InvalidMoveException;
 import plateau.Plateau;
 
 /**
@@ -54,8 +55,8 @@ class Mouvement{
   /**
    * Effectue le mouvement enregistré.
    */
-  public void effectuer(){
-
+  public void effectuer() throws InvalidMoveException{
+    
     Plateau.faireMouvement(this.x, this.y, this.autreX, this.autreY, this.decouvre);
   }
 }

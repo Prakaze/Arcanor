@@ -59,7 +59,6 @@ abstract public class Joueur{
   /**Cette méthode fait jouer le joueur et retourne un boolean pour
   * permettre l'arrêt de la partie en cours dans la classe Arcanor si le
   * joueur est un humain et saisit "quit" dans le terminal.
-  * @return vrai si le joueur est un humain et a saisi "quit".
   */
-  abstract public boolean joue();
+  abstract public void joue();
 }

@@ -1,7 +1,7 @@
 package joueur;
 
-import plateau.Plateau;
-import plateau.Piece;
+import commandes.CommandeExecuteur;
+import commandes.InvalidCommandException;
 import java.util.Scanner;
 
 public class Humain extends Joueur{
@@ -21,7 +21,7 @@ public class Humain extends Joueur{
     super(equipe);
     sc = new Scanner(System.in);
   }
-  
+
 
   /**
    * Fonction demandant à un joueur dont l'équipe est précisée d'entrer un
@@ -35,63 +35,28 @@ public class Humain extends Joueur{
    * saisie. Cette méthode retourne un boolean pour permettre l'arrêt de la
    * partie en cours dans la classe Arcanor quand le joueur saisit "quit" dans
    * le terminal.
-   * @return vrai si le joueur a saisi "quit" et veut quitter la partie.
    */
-  public boolean joue(){
+  public void joue(){
 
-    System.out.println("Joueur " + this.EQUIPE + ", saisissez votre mouvement:\n");
+    if(this.estBloque()){
 
-    boolean continuer = true;
-    boolean jeuFini = false;
+      System.out.println("Le joueur est bloqué, passe son tour.");
 
-    do{
+    } else{
+      System.out.println("Joueur " + this.EQUIPE + ", saisissez votre mouvement:\n");
 
-      String[] parts;
+      boolean aJoue = false;
 
-      do{
+      while(!aJoue){
 
-        String saisie = sc.nextLine();
-        parts = saisie.split(" ");
-
-        if(saisie.equals("quit")){
-
-          jeuFini = true;
-
-        } else if(parts.length == 5){
-
-          continuer = true;
-
-        } else {
-
-          System.out.println("\nLigne invalide, veuillez re-saisir la ligne:\n");
-          continuer = false;
-        }
-
-      } while(!continuer && !jeuFini);
-
-      if(!jeuFini){
-
-        int x = Integer.parseInt(parts[0]);
-        int y = Integer.parseInt(parts[1]);
-        int autreX = Integer.parseInt(parts[2]);
-        int autreY = Integer.parseInt(parts[3]);
-        boolean decouvre = Boolean.parseBoolean(parts[4]);
-
-        int mouv = Plateau.typeMouvement(x, y, autreX, autreY);
-
-        if(mouv == Plateau.MOUV_IMPOSSIBLE){
-
-          System.out.println("\nMouvement impossible, veuillez re-saisir la ligne:\n");
-          continuer = false;
-        } else {
-
-          Plateau.faireMouvement(x, y, autreX, autreY, decouvre);
-          continuer = true;
+        try{
+          CommandeExecuteur.execute(sc.nextLine());
+          aJoue = true;
+        } catch(InvalidCommandException e){
+          System.out.println(e.getMessage() + ", veuillez resaisir la ligne:");
+          aJoue = false;
         }
       }
-
-    } while(!continuer && !jeuFini);
-
-    return jeuFini;
+    }
   }
 }

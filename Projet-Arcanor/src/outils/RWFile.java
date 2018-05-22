@@ -15,25 +15,19 @@ public class RWFile {
 	 * @param fileName le nom du fichier
 	 * @return Une ArrayList de String contenant le texte du fichier
 	 */
-	 public static ArrayList<String> readFile(String fileName){
+	 public static ArrayList<String> readFile(String fileName) throws FileNotFoundException{
 
-     ArrayList<String> file = new ArrayList <String>();
-     Scanner in;
+  	ArrayList<String> file = new ArrayList <String>();
+  	Scanner in;
 
-     try {
+    in = new Scanner (new FileReader (fileName));
 
-       in = new Scanner (new FileReader (fileName));
+    while (in.hasNextLine()) {
 
-       while (in.hasNextLine()) {
+     file.add(in.nextLine());
+    }
 
-         file.add(in.nextLine());
-       }
-
-       in.close();
-     } catch (FileNotFoundException e) {
-
-       System.out.println("Fichier " + fileName + " inexistant");
-     }
+    in.close();
 
      return file;
    }
@@ -44,20 +38,14 @@ public class RWFile {
 	 * @param fileName nom du fichier
 	 * @param liste L'Arraylist qui va être écrite dans le fichier texte
 	 */
-	 public static void writeFile(ArrayList<String> liste, String fileName){
+	 public static void writeFile(ArrayList<String> liste, String fileName) throws FileNotFoundException{
 
-     try {
+     PrintWriter out = new PrintWriter (fileName);
+ 		for (String ligne : liste) {
 
- 			PrintWriter out = new PrintWriter (fileName);
- 			for (String ligne : liste) {
-
- 				out.println(ligne);
- 			}
-
- 			out.close();
- 		} catch (FileNotFoundException e) {
-
- 			System.out.println("Fichier " + fileName + " inexistant");
+ 			out.println(ligne);
  		}
+
+ 		out.close();
    }
 }

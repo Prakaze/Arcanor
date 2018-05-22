@@ -2,6 +2,7 @@ package plateau;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.io.FileNotFoundException;
 import outils.RWFile;
 
 public class Plateau{
@@ -53,7 +54,7 @@ public class Plateau{
    * le nom ne recevera pas de caractères 'interdits' pour le nommage de
    * fichiers ni de '/' qui vont créer une erreur.
    */
-  public static void sauvePartie(String nomSauvegarde){
+  public static void sauvePartie(String nomSauvegarde) throws FileNotFoundException{
 
     ArrayList<String> fichier = new ArrayList<String>();
 
@@ -96,7 +97,7 @@ public class Plateau{
    * rajoutée. Par exemple, pour charger le fichier /data/exemple.txt, le
    * paramètre nomSauvegarde devra prendre la valeur "exemple".
    */
-  public static void chargePartie(String nomSauvegarde){
+  public static void chargePartie(String nomSauvegarde) throws FileNotFoundException{
 
     ArrayList<String> fichier = RWFile.readFile("../data/" + nomSauvegarde + ".txt");
 
@@ -273,7 +274,7 @@ public class Plateau{
    * @param decouvre boolean valant vrai si l'on veut découvrir la potentielle
    * piece cachée au prochain coup
    */
-  public static void faireMouvement(int x, int y, int autreX, int autreY, boolean decouvre){
+  public static void faireMouvement(int x, int y, int autreX, int autreY, boolean decouvre) throws InvalidMoveException{
 
     int mouvement = typeMouvement(x, y, autreX, autreY);
 
@@ -310,7 +311,7 @@ public class Plateau{
       }
     } else {
 
-      System.out.println("Mouvement impossible"); //debug feature
+      throw new InvalidMoveException("Mouvement invalide saisi");
     }
   }
 
