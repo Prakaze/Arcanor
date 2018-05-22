@@ -6,9 +6,22 @@ import plateau.InvalidMoveException;
 
 public class CommandeExecuteur{
 
+  /**
+   * La liste des commandes reconnues par la classe
+   *  - deplacer [x : int] [y : int] [autreX : int] [autreY : int] [decouvre : boolean] 
+   *  - quitter
+   *  - sauvegarder [nomSauvegarde]
+   *  - charger [nomSauvegarde]
+   */
   static String[] listeCommandes = {"deplacer", "quitter", "sauvegarder", "charger"};
 
-
+  /**
+   * Cette fonction retourne l'indice de la commande correspondant à la String
+   * passée en paramètre. S'il n'y a pas de correspondances, elle renvoie -1.
+   * @param commande La commande dont on veut savoir la correspondance
+   * @return L'indice de la commande dans le tableau de String listeCommandes,
+   * -1 s'il n'y a pas de correspondance
+   */
   private static int indiceCommande(String commande){
 
     int i = 0;
@@ -28,6 +41,13 @@ public class CommandeExecuteur{
     return indice;
   }
 
+
+  /**
+   * @param indiceCommande le numéro de la commande que l'on veut executer
+   * (indice dans la liste listeCommandes)
+   * @param argument L'argument de la commande (les paramètres), ignorés si non
+   * besoin
+   */
   private static void executeCommande(int indiceCommande, String argument) throws InvalidCommandException{
 
     switch (indiceCommande){
@@ -37,7 +57,7 @@ public class CommandeExecuteur{
         String[] parts = argument.split(" ");
 
         try{
-          
+
           int x = Integer.parseInt(parts[0]);
           int y = Integer.parseInt(parts[1]);
           int autreX = Integer.parseInt(parts[2]);
@@ -87,6 +107,18 @@ public class CommandeExecuteur{
     }
   }
 
+  /**
+   * Execute une ligne de commande sous la forme "nomCommande arguments".
+   * Par exemple la commande "déplace" demande 5 arguments: la position de la
+   * case d'origine en x puis y, la position de la case de destination en x puis
+   * y et un boolean indiquant si l'on veut découvrir la pièce ou non.
+   * Quelques exemples de commande:
+   *  - deplacer 0 1 0 2 false
+   *  - quitter
+   *  - sauvegarder testSauvegarde
+   *
+   * @param line la ligne de commande qui sera exécutée
+   */
   public static void execute(String line) throws InvalidCommandException{
 
     String[] parts = line.split(" ");

@@ -120,7 +120,8 @@ public class Plateau{
 
 
   /**
-   *
+   *  Ajoute une pièce dans le damier a partir d'une ligne de texte tirée d'un
+   * fichier texte de sauvegarde de partie.
    * @param ligne La ligne de texte précisant les paramètres de la pièce a créer
    * et sa position dans le damier. Ses informations sont stockées dans la ligne
    * sous la forme: "posX,posY paramPiece".'paramPiece' correspond au résultat

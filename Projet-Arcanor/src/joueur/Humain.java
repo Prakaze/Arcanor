@@ -24,17 +24,10 @@ public class Humain extends Joueur{
 
 
   /**
-   * Fonction demandant à un joueur dont l'équipe est précisée d'entrer un
-   * mouvement dans le terminal sous la forme
-   * "[posX pièce] [posY pièce] [posX destination] [posY destination] [découvre]".
-   * Par exemple, un mouvement de la pièce en 0 0 vers la case 0 1 sans
-   * découvrir la pièce couverte donnera: "0 0 0 1 false". Si l'utilisateur
-   * souhaite quitter, il devra écrire "quit" dans le terminal. Si la commande
-   * ne contient pas le bon nombre de paramètres, le programme redemande une
-   * saisie. Si le mouvement saisi est impossible, le programme redemande une
-   * saisie. Cette méthode retourne un boolean pour permettre l'arrêt de la
-   * partie en cours dans la classe Arcanor quand le joueur saisit "quit" dans
-   * le terminal.
+   * Fonction demandant à un joueur humain de jouer. Jouer consiste à saisir une
+   * commande qui sera executée par la classe CommandeExecuteur. Voir la liste
+   * des commandes disponibles dans la classe CommandeExecuteur pour plus
+   * d'informations.
    */
   public void joue(){
 
@@ -50,9 +43,11 @@ public class Humain extends Joueur{
       while(!aJoue){
 
         try{
+
           CommandeExecuteur.execute(sc.nextLine());
           aJoue = true;
         } catch(InvalidCommandException e){
+
           System.out.println(e.getMessage() + ", veuillez resaisir la ligne:");
           aJoue = false;
         }
