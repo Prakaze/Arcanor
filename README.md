@@ -6,7 +6,15 @@ N'hésitez pas a jeter un coup d'oeil a la javadoc, je l'actualise a chaque modi
 
 Pour ce qui est de tester le jeu, il fonctionne de cette facon:
 
-L'utilisateur devra saisir un mouvement dans le terminal sous la forme: "positionPieceX positionPieceY positionCaseDestinationX positionCaseDestinationY DecouvreSaPiece". Par exemple, pour faire un mouvement de la pièce en 4 1 vers la case 5 0 sans découvrir la pièce couverte, l'utilisateur devra saisir: "4 1 5 0 false". Si l'utilisateur souhaite quitter, il devra écrire "quit" dans le terminal.
+l'utilisateur pourra saisir différentes commandes dans le terminal:
+  - deplacer <x:int> <y:int> <autreX:int> <autreY:int> <decouvrir:boolean>
+      pour déplacer une pièce
+  - quitter
+      pour quitter le jeu, utilizez cette commande (ne surtout pas faire un CTL+C, ca fait planter le processus)
+  - charger <nomSauvegarde>
+      pour charger une sauvegarde
+  - sauvegarder <nomSauvegarde>
+      pour sauvegarder une partie
 
 Vous pouvez faire jouer l'IA contre elle même en modifiant dans le fichier Arcanor.java (ligne 28):
 
