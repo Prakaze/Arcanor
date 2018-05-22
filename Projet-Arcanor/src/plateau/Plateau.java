@@ -318,7 +318,7 @@ public class Plateau{
   /**
    * Méthode retournant, pour une équipe donnée, l'indice de la rangée ennemie
    * sur laquelle elle doit marquer des points
-   * @param equipe L'équipe donnéel
+   * @param equipe L'équipe donnée
    * @return Le numéro de la rangée ennemie
    */
   private static int rangeeEnnemie(int equipe){
@@ -358,12 +358,12 @@ public class Plateau{
           if(damier[x][y].getEquipe() == 0){
 
             texte += " (" + Integer.toString(damier[x][y].getTaille()) + ")";
-            
+
           } else if(damier[x][y].getEquipe() == 1){
 
             texte += " [" + Integer.toString(damier[x][y].getTaille()) + "]";
           } else {
-			  
+
 			texte += "    ";
 		  }
         }
