@@ -54,9 +54,10 @@ class Mouvement{
 
   /**
    * Effectue le mouvement enregistré.
+   * @throws InvalidMoveException lorsque le mouvement est invalide
    */
   public void effectuer() throws InvalidMoveException{
-    
+
     Plateau.faireMouvement(this.x, this.y, this.autreX, this.autreY, this.decouvre);
   }
 }

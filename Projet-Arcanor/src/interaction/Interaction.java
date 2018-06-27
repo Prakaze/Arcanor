@@ -1,6 +1,6 @@
 package interaction;
 
-interface Interaction{
+public interface Interaction{
 
   public void demandeInteration();
 }

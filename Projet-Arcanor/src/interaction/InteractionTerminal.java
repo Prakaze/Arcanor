@@ -5,7 +5,7 @@ import commandes.CommandeExecuteur;
 import commandes.InvalidCommandException;
 import java.util.Scanner;
 
-class InteractionTerminal implements Interaction{
+public class InteractionTerminal implements Interaction{
 
   /**
    * Le joueur associé

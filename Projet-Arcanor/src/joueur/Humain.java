@@ -1,5 +1,8 @@
 package joueur;
 
+import interaction.Interaction;
+import interaction.InteractionTerminal;
+
 public class Humain extends Joueur{
 
   /**

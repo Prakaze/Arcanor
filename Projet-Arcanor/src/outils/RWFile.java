@@ -14,6 +14,7 @@ public class RWFile {
 	 * en une ArrayList de String
 	 * @param fileName le nom du fichier
 	 * @return Une ArrayList de String contenant le texte du fichier
+	 * @throws FileNotFoundException lorsque le nom de fichier specifié n'existe pas
 	 */
 	 public static ArrayList<String> readFile(String fileName) throws FileNotFoundException{
 
@@ -37,6 +38,7 @@ public class RWFile {
 	 * Méthode enregistrant une ArrayList de String dans un fichier texte
 	 * @param fileName nom du fichier
 	 * @param liste L'Arraylist qui va être écrite dans le fichier texte
+	 * @throws FileNotFoundException lorsque le nom de fichier specifié n'existe pas
 	 */
 	 public static void writeFile(ArrayList<String> liste, String fileName) throws FileNotFoundException{
 

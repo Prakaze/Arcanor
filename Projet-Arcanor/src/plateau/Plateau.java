@@ -53,6 +53,8 @@ public class Plateau{
    * paramètre nomSauvegarde devra prendre la valeur "exemple". On considère que
    * le nom ne recevera pas de caractères 'interdits' pour le nommage de
    * fichiers ni de '/' qui vont créer une erreur.
+   * @throws FileNotFoundException lorsque le nom de fichier spécifié n'existe
+   * pas
    */
   public static void sauvePartie(String nomSauvegarde) throws FileNotFoundException{
 
@@ -96,6 +98,8 @@ public class Plateau{
    * sera automatiquement stocké dans /data, et l'extension .txt sera elle aussi
    * rajoutée. Par exemple, pour charger le fichier /data/exemple.txt, le
    * paramètre nomSauvegarde devra prendre la valeur "exemple".
+   * @throws FileNotFoundException lorsque le nom de fichier spécifié n'existe
+   * pas
    */
   public static void chargePartie(String nomSauvegarde) throws FileNotFoundException{
 
@@ -274,6 +278,7 @@ public class Plateau{
    * souhaite déplacer la pièce
    * @param decouvre boolean valant vrai si l'on veut découvrir la potentielle
    * piece cachée au prochain coup
+   * @throws InvalidMoveException lorsque le mouvement donné est invalide
    */
   public static void faireMouvement(int x, int y, int autreX, int autreY, boolean decouvre) throws InvalidMoveException{
 

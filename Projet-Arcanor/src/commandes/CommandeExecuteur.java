@@ -8,7 +8,7 @@ public class CommandeExecuteur{
 
   /**
    * La liste des commandes reconnues par la classe
-   *  - deplacer [x : int] [y : int] [autreX : int] [autreY : int] [decouvre : boolean] 
+   *  - deplacer [x : int] [y : int] [autreX : int] [autreY : int] [decouvre : boolean]
    *  - quitter
    *  - sauvegarder [nomSauvegarde]
    *  - charger [nomSauvegarde]
@@ -47,6 +47,7 @@ public class CommandeExecuteur{
    * (indice dans la liste listeCommandes)
    * @param argument L'argument de la commande (les paramètres), ignorés si non
    * besoin
+   * @throws InvalidCommandException lorsque la commande saisie n'est pas valide
    */
   private static void executeCommande(int indiceCommande, String argument) throws InvalidCommandException{
 
@@ -118,6 +119,7 @@ public class CommandeExecuteur{
    *  - sauvegarder testSauvegarde
    *
    * @param line la ligne de commande qui sera exécutée
+   * @throws InvalidCommandException lorsque la commande saisie n'est pas valide
    */
   public static void execute(String line) throws InvalidCommandException{
 
